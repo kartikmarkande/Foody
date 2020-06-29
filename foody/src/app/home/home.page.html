@@ -1,0 +1,99 @@
+<ion-header [translucent]="true">
+  <ion-row class="headerStyle">
+    <ion-col>
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-col>
+    <ion-col class="text-center">
+      <ion-label class="header-text">Details</ion-label>
+    </ion-col>
+    <ion-col class="text-end">
+      <ion-icon name="menu-outline"></ion-icon>
+    </ion-col>
+  </ion-row>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div id="fluid-container">
+    <ion-grid>
+      <ion-chip class="searchContainer">
+        <ion-col [scrollEvents]="true" scroll-x="true" scroll-y="false" class="chipcontainer">
+          <ion-chip class="allTags chips-container"
+            *ngFor="let default of current_tags; let i=index" class="hastagChips allTags">
+            <ion-label>#{{default}}</ion-label>
+            <ion-icon class="chipRemove" name="close" [hidden]="i < 2"
+              (click)="removeTag(default)"></ion-icon>
+          </ion-chip>
+        </ion-col>
+      </ion-chip>
+    </ion-grid>
+    <ion-grid>
+      <ion-row>
+          <ion-col>
+            <div class="text-first">
+              <ion-label class="titles">Hashtags:</ion-label>
+              <ion-chip class="allTags" *ngFor="let hashtag of searchable_tags"
+                (click)="searchProducts(hashtag)">
+                <ion-label>#{{hashtag}}</ion-label>
+              </ion-chip>
+            </div>
+          </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid class="text-center">
+            <ion-label [hidden]="productList.length > 0">No products found for this search.
+            </ion-label>
+    </ion-grid>
+    <ion-grid class="cards-container scrolling-wrapper" [hidden]="productList.length < 1">
+      <ion-row>
+        <ion-col class="text-first">
+            <ion-label class="titles">Your Posts </ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-card class="cofluence-card" *ngFor="let product of productList">
+        <img class="imageSize" src="{{product?.image}}" />
+          <ion-icon class="card-header" name="images" [hidden]="product.type != 'image'"></ion-icon>
+          <ion-icon class="card-header" name="logo-youtube" [hidden]="product.type != 'video'"></ion-icon>
+          <ion-row class="card-footer">
+            <ion-col class="text-end">
+                <ion-label class="titles-footer"><ion-icon name="heart"></ion-icon> {{product?.likes}} </ion-label>
+            </ion-col>
+            <ion-col >
+                <ion-label class="titles-footer">
+                    <ion-icon name="barcode"></ion-icon>{{product?.comments}}</ion-label>
+            </ion-col>
+          </ion-row>
+      </ion-card>
+    </ion-grid>
+    <ion-grid>
+      <ion-row class="similarProductstitle">
+        <ion-col class="text-first">
+          <ion-label class="titles">Similar Posts </ion-label>
+        </ion-col>
+        <ion-col class="text-end">
+          <ion-label class="titles">8 Posts</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-card class="cofluence-similar-card" *ngFor="let product of similarProducts">
+        <img class="imageSize" src="{{product?.image}}" />
+        <ion-icon class="card-header" name="images" [hidden]="product.type != 'image'">
+        </ion-icon>
+        <ion-icon class="card-header" name="logo-youtube"
+          [hidden]="product.type != 'video'"></ion-icon>
+        <ion-row class="card-footer">
+          <ion-col class="text-end">
+            <ion-label class="titles-footer">
+              <ion-icon name="heart"></ion-icon> {{product?.likes}}
+            </ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-label class="titles-footer">
+              <ion-icon name="barcode"></ion-icon>{{product?.comments}}
+            </ion-label>
+          </ion-col>
+          </ion-row>
+        </ion-card>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>
