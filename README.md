@@ -5,7 +5,6 @@ Best app for finding the great food
 
 # Use nvm 12.0.0
 To install the nvm 12.0.0, command is `nvm install 12.0.0`. After install, use it `nvm use 12.0.0`.
-After cloning - install
 
 
 
